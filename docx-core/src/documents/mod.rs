@@ -1345,7 +1345,8 @@ fn update_document_by_toc(
                             TableOfContentsItem::new()
                                 .text(paragraph.raw_text())
                                 .toc_key(&toc_key)
-                                .level(*heading_level),
+                                .level(*heading_level)
+                                .tab_leader_type(toc.tab_leader_type.clone()),
                         );
                         paragraph =
                             Box::new(paragraph.wrap_by_bookmark(generate_bookmark_id(), &toc_key));

@@ -52,6 +52,7 @@ pub struct TableOfContents {
     pub without_sdt: bool,
     pub alias: Option<String>,
     pub page_ref_placeholder: Option<String>,
+    pub tab_leader_type: Option<TabLeaderType>,
     // it is inserted in before toc.
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub before_contents: Vec<TocContent>,
@@ -120,6 +121,11 @@ impl TableOfContents {
 
     pub fn dirty(mut self) -> Self {
         self.dirty = true;
+        self
+    }
+
+    pub fn tab_leader_type(mut self, tab_leader_type: Option<TabLeaderType>) -> Self {
+        self.tab_leader_type = tab_leader_type;
         self
     }
 

@@ -12,6 +12,7 @@ pub struct TableOfContentsItem {
     pub level: usize,
     pub dirty: bool,
     pub page_ref: Option<String>,
+    pub tab_leader_type: Option<TabLeaderType>,
 }
 
 impl TableOfContentsItem {
@@ -46,6 +47,11 @@ impl TableOfContentsItem {
         self.page_ref = Some(r.into());
         self
     }
+
+    pub fn tab_leader_type(mut self, tab_leader_type: Option<TabLeaderType>) -> Self {
+        self.tab_leader_type = tab_leader_type;
+        self
+    }
 }
 
 impl BuildXML for Vec<TableOfContentsItem> {
@@ -68,7 +74,7 @@ impl BuildXML for Vec<TableOfContentsItem> {
                 p = p.add_tab(
                     Tab::new()
                         .val(TabValueType::Right)
-                        .leader(TabLeaderType::Dot)
+                        .leader(t.tab_leader_type.unwrap_or(TabLeaderType::Dot))
                         // TODO: for now set 80000
                         .pos(80000),
                 );
@@ -102,7 +108,7 @@ impl BuildXML for Vec<TableOfContentsItem> {
                 p = p.add_tab(
                     Tab::new()
                         .val(TabValueType::Right)
-                        .leader(TabLeaderType::Dot)
+                        .leader(t.tab_leader_type.unwrap_or(TabLeaderType::Dot))
                         // TODO: for now set 80000
                         .pos(80000),
                 );
