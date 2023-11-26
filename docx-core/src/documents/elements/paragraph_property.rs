@@ -184,7 +184,8 @@ fn inner_build(p: &ParagraphProperty) -> Vec<u8> {
         .add_optional_child(&p.line_spacing)
         .add_optional_child(&p.outline_lvl)
         .add_optional_child(&p.paragraph_property_change)
-        .add_optional_child(&p.borders);
+        .add_optional_child(&p.borders)
+        .add_optional_child(&p.section_property);
 
     if let Some(v) = p.keep_next {
         if v {
